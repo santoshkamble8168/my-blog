@@ -1,7 +1,16 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
+import {AxiosResponse} from "axios"
+import service from '../services'
+import ICollectionResponse, { ICategory } from '../types'
 
-const Home: NextPage = () => {
+interface IpropTypes {
+  categories: {
+    items: ICategory[]
+  }
+}
+
+const Home: NextPage<IpropTypes> = ({categories}) => {
   return (
     <>
       <Head>
@@ -16,6 +25,20 @@ const Home: NextPage = () => {
         
     </>
   )
+}
+
+//Server side rendering
+export const getServerSideProps: GetServerSideProps = async () => {
+  
+  const {data : categories} : AxiosResponse<ICollectionResponse<ICategory[]>> = await service.category.getCategories()
+  
+  return {
+    props: {
+      categories: {
+        items: categories.data
+      }
+    }
+  }
 }
 
 export default Home
