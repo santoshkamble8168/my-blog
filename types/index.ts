@@ -33,6 +33,12 @@ export interface IUser {
     email: string,
     avatar: string
 }
+
+export interface ITag {
+    _id: string,
+    tag: string,
+    slug: string
+}
 export interface IPost {
     _id: string,
     type: string,
@@ -46,4 +52,5 @@ export interface IPost {
     createdBy: IUser,
     createdAt: string,
     category: ICategory[],
+    tags: ITag[]
 }

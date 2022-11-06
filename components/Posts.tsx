@@ -8,7 +8,7 @@ interface IpropTypes {
 
 const Posts = ({posts} : IpropTypes) => {
   return (
-      <div className='grid lg:grid-cols-2 gap-16 mt-8'>
+      <div className='mt-8 mb-4'>
           {
               posts.map(post => (
                   <PostCard post={post} key={post._id} />

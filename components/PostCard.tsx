@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { dateFormat, Routes } from '../utils';
 import { IPost } from '../types'
+import Tags from './Tags';
 
 interface IpropTypes {
     post: IPost
@@ -11,7 +12,7 @@ const PostCard = ({ post }: IpropTypes) => {
     const defaultAvatar = '/assets/images/avatar.png'
 
     return (
-        <div className='post'>
+        <div className='post mb-10'>
             <Link href={"#"}>
                 <div className='flex items-center my-1 hover:cursor-pointer'>
                     <div
@@ -35,12 +36,20 @@ const PostCard = ({ post }: IpropTypes) => {
                 </div>
             </Link>
             <Link href={`${Routes.HOME}/${post.slug}`}>
-                <h2
-                    className='text-xl text-gray-500 font-bold hover:text-gray-600 hover:underline hover:cursor-pointer hover:decoration-primary'
-                >
-                    {post.title}
-                </h2>
+                <div>
+                    <h2
+                        className='text-xl text-gray-500 font-bold hover:text-gray-600 hover:underline hover:cursor-pointer hover:decoration-primary'
+                    >
+                        {post.title}
+                    </h2>
+                    <div>
+                        {post.description.slice(0, 200)}{post.description.length > 200 ? '...' : ''}
+                    </div>
+                </div>
             </Link>
+
+            <Tags tags={post.tags} />
+
             <div className='flex items-center my-1'>
                 <div
                     className='text-gray-400 after:content-["\2219"] after:ml-1 after:mr-1 after:text-gray-600 after:font-bold'
@@ -53,9 +62,7 @@ const PostCard = ({ post }: IpropTypes) => {
                     {post.readTime} read
                 </div>
             </div>
-            <div>
-                {post.description.slice(0, 200)}{post.description.length > 200 ? '...' : ''}
-            </div>
+            
         </div>
     )
 }
