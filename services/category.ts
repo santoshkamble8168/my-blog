@@ -1,3 +1,7 @@
 import api from "./api"
 
-export const getCategories = async () => api.get("/categories")
+const getCategories = async () => api.get("/category")
+
+export {
+    getCategories
+}

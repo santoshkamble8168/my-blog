@@ -1,9 +1,12 @@
-import { getCategories } from "./category";
+// import { getCategories } from "./category";
 
-const service = {
-    category: {
-        getCategories
-    }
-}
+// const service = {
+//     category: {
+//         getCategories
+//     }
+// }
 
-export default service
+// export default service
+
+export * from "./category"
+export * from "./post"

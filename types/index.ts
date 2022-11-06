@@ -1,6 +1,8 @@
 export interface ICategory {
-    id: string,
-    attributes: ICategoryAttribute 
+    _id: string,
+    name: string,
+    slug: string
+    //attributes: ICategoryAttribute 
 }
 
 export interface ICategoryAttribute {
@@ -18,7 +20,30 @@ export interface IMeta {
 }
 
 export interface IPagination {
-    page: number,
-    count: number,
     total: number
+    currentPage: number,
+    perPage: number,
+    totalPages: number
+}
+
+export interface IUser {
+    _id: string,
+    role: string,
+    name: string,
+    email: string,
+    avatar: string
+}
+export interface IPost {
+    _id: string,
+    type: string,
+    title: string,
+    content: string,
+    description: string,
+    slug: string,
+    readTime: string,
+    status: string,
+    featuredImage: string,
+    createdBy: IUser,
+    createdAt: string,
+    category: ICategory[],
 }

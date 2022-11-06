@@ -1,5 +1,7 @@
 const Routes = {
     HOME: "/",
+    POST:"/:slug",
+    CATEGORY: "/category",
 }
 
-export default Routes
+export { Routes }
