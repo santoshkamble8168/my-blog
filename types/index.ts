@@ -31,7 +31,8 @@ export interface IUser {
     role: string,
     name: string,
     email: string,
-    avatar: string
+    avatar: string,
+    slug: string
 }
 
 export interface ITag {

@@ -1,44 +1,27 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { dateFormat, Routes } from '../utils';
+
+import { Routes } from '../utils';
 import { IPost } from '../types'
+
+/*components*/
 import Tags from './Tags';
+import { Bookmark, Comment, Like } from './Interactions';
+import Avatar from './Avatar';
 
 interface IpropTypes {
     post: IPost
 }
 
 const PostCard = ({ post }: IpropTypes) => {
-    const defaultAvatar = '/assets/images/avatar.png'
-
     return (
         <div className='post mb-10'>
-            <Link href={"#"}>
-                <div className='flex items-center my-1 hover:cursor-pointer'>
-                    <div
-                        className='mr-2 flex items-center justify-center rounded-lg overflow-hidden'
-                    >
-                        <Image
-                            src={
-                                post.createdBy.avatar ?
-                                    post.createdBy.avatar :
-                                    defaultAvatar
-                            }
-                            height={30}
-                            width={30}
-                        />
-                    </div>
-                    <div
-                        className='mr-2 text-sm font-bold text-gray-600'
-                    >
-                        {post.createdBy.name}
-                    </div>
-                </div>
-            </Link>
-            <Link href={`${Routes.HOME}/${post.slug}`}>
+
+            <Avatar createdBy={post.createdBy} date={post.createdAt} />
+
+            <Link href={`${Routes.HOME}${post.slug}`}>
                 <div>
                     <h2
-                        className='text-xl text-gray-500 font-bold hover:text-gray-600 hover:underline hover:cursor-pointer hover:decoration-primary'
+                        className='text-xl text-gray-500 font-bold hover:text-gray-600 hover:cursor-pointer hover:decoration-primary'
                     >
                         {post.title}
                     </h2>
@@ -50,19 +33,28 @@ const PostCard = ({ post }: IpropTypes) => {
 
             <Tags tags={post.tags} />
 
-            <div className='flex items-center my-1'>
-                <div
-                    className='text-gray-400 after:content-["\2219"] after:ml-1 after:mr-1 after:text-gray-600 after:font-bold'
-                >
-                    {dateFormat(post.createdAt, "MMM DD, YYYY")}
+            <div className='flex items-center justify-between my-2'>
+                <div className='intractions flex items-center'>
+                    <div className='like flex items-center mr-4'>
+                        <Like />
+                    </div>
+                    <div className='like flex items-center mr-4'>
+                        <Comment />
+                    </div>
                 </div>
-                <div
-                    className='text-gray-400'
-                >
-                    {post.readTime} read
+
+                <div className='info flex items-center'>
+                    <div
+                        className='read-time text-gray-400 text-sm mr-2'
+                    >
+                        {post.readTime} read
+                    </div>
+                    <div>
+                        <Bookmark />
+                    </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }
